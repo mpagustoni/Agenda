@@ -7,6 +7,15 @@ public class Contact implements Serializable{
 	private String name, address, phone;
 	private Date date;
 	
+	
+	public Contact(String name, String address, String phone){
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		
+		this.date = new Date();
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -30,11 +39,11 @@ public class Contact implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	public long getDate() {
+		return this.date.getTime();
 
-	Contact(String name, String address, String phone){
-		this.name = name;
-		this.address = address;
-		this.phone = phone;
 	}
+	
 	
 }
