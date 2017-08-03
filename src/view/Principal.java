@@ -19,6 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
 public class Principal {
 
@@ -64,8 +65,8 @@ public class Principal {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.EAST);
 		
-		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAddContact = new JButton("Adicionar");
+		btnAddContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					AddContactDialog dialog = new AddContactDialog();
@@ -77,7 +78,11 @@ public class Principal {
 				updateTable();
 			}
 		});
-		panel.add(btnNewButton);
+		panel.setLayout(new MigLayout("", "[88px]", "[26px][]"));
+		panel.add(btnAddContact, "cell 0 0,alignx left,aligny top");
+		
+		JButton btnRemoveContact = new JButton("Remover");
+		panel.add(btnRemoveContact, "cell 0 1,alignx left,aligny top");
 	}
 	
 	private void updateTable() {

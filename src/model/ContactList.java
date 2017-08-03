@@ -51,7 +51,7 @@ public class ContactList {
 		}
 	}
 	
-	public void addContact(String name, String address, String phone) {
+	public void addContact(String name, String phone, String address) {
 		ArrayList<Contact> contactList = this.getContacts();
 		Contact newContact = new Contact(name, address, phone);
 		contactList.add(newContact);

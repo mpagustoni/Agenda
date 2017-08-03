@@ -16,8 +16,8 @@ public class Controller {
 		return cl.getContacts();
 	}
 	
-	public void addContact(String name, String address, String phone) {
-		cl.addContact(name, address, phone);
+	public void addContact(String name, String phone, String address ) {
+		cl.addContact(name, phone, address);
 	}
 	
 	public void removeContact(int index) {

@@ -38,9 +38,9 @@ public class AddContactDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblNome = new JLabel("Nome:");
-			lblNome.setBounds(12, 13, 31, 14);
-			contentPanel.add(lblNome);
+			JLabel lblName = new JLabel("Nome:");
+			lblName.setBounds(12, 13, 31, 14);
+			contentPanel.add(lblName);
 		}
 		{
 			textFieldName = new JTextField();
@@ -49,9 +49,9 @@ public class AddContactDialog extends JDialog {
 			textFieldName.setColumns(10);
 		}
 		{
-			JLabel lblTelefone = new JLabel("Telefone:");
-			lblTelefone.setBounds(222, 13, 46, 14);
-			contentPanel.add(lblTelefone);
+			JLabel lblPhone = new JLabel("Telefone:");
+			lblPhone.setBounds(222, 13, 46, 14);
+			contentPanel.add(lblPhone);
 		}
 		{
 			textFieldPhone = new JTextField();
@@ -60,9 +60,9 @@ public class AddContactDialog extends JDialog {
 			textFieldPhone.setColumns(10);
 		}
 		{
-			JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-			lblEndereo.setBounds(12, 41, 49, 14);
-			contentPanel.add(lblEndereo);
+			JLabel lblAddress = new JLabel("Endere\u00E7o:");
+			lblAddress.setBounds(12, 41, 49, 14);
+			contentPanel.add(lblAddress);
 		}
 		{
 			textFieldAddress = new JTextField();
