@@ -1,16 +1,28 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-public class Principal extends JFrame {
+import controller.Controller;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.BoxLayout;
+import javax.swing.SpringLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionEvent;
 
-	private JPanel contentPane;
+public class Principal {
+
+	private JFrame frame;
 	private JTable table;
 
 	/**
@@ -20,8 +32,8 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal frame = new Principal();
-					frame.setVisible(true);
+					Principal window = new Principal();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -30,18 +42,50 @@ public class Principal extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
 	public Principal() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		table = new JTable();
-		contentPane.add(table, BorderLayout.SOUTH);
+		initialize();
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 802, 402);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		table = new JTable();
+		table.setEnabled(false);
+		updateTable();
+		frame.getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.EAST);
+		
+		JButton btnNewButton = new JButton("Adicionar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					AddContactDialog dialog = new AddContactDialog();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				updateTable();
+			}
+		});
+		panel.add(btnNewButton);
+	}
+	
+	private void updateTable() {
+		table.setModel(new DefaultTableModel(
+				new Controller().getContactByArray(),
+			new String[] {
+				"Nome", "Telefone", "Endereço"
+			}
+		));
+	}
 }
