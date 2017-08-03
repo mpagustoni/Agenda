@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import controller.Controller;
 import model.Contact;
 import model.ContactList;
 
@@ -26,13 +27,14 @@ public class prototipagem {
 	}
 
 	
-	@Test
+	//@Test
 	public void insertionTest() {
 		ContactList cl = new ContactList();
 		ArrayList<Contact> alc = cl.getContacts();
 		String n = new Integer(alc.size()).toString();
-		cl.addContact(n, n, n);
-		
+		for(int i = 0; i < 50; i++) {
+			cl.addContact(n, n, n);
+		}
 		alc = cl.getContacts();
 		
 		for (Contact a: alc) {
@@ -40,7 +42,7 @@ public class prototipagem {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void fillList() {
 		ContactList cl = new ContactList();
 		ArrayList<Contact> c = cl.getContacts();
