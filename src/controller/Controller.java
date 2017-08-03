@@ -24,4 +24,15 @@ public class Controller {
 		cl.removeContact(index);
 	}
 	
+	public String [][] getContactByArray(){
+		ArrayList<Contact> alc  = this.getContacts();
+		String [][] contacts = new String[alc.size()][3];
+		for(Contact c: alc) {
+			int i = alc.indexOf(c);
+			contacts[i][0] = c.getName();
+			contacts[i][1] = c.getPhone();
+			contacts[i][2] = c.getAddress();
+		}
+		return contacts;
+	}
 }
