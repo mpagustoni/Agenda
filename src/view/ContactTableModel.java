@@ -14,10 +14,12 @@ public class ContactTableModel extends AbstractTableModel {
 	private final int COL_CHECK = 3;
 	private final int COL_COUNT = 4;
 	private ArrayList<Contact> contactList;
+	private Boolean[] checkList;
 	
 	
 	public ContactTableModel() {
 		 contactList = new Controller().getContacts();
+		 checkList = new Boolean[contactList.size()];
 	}
 	@Override
 	public int getColumnCount() {
@@ -38,7 +40,7 @@ public class ContactTableModel extends AbstractTableModel {
 		case COL_ADDRESS:
 			return "Endereço";
 		default:
-			return  "";
+			return  "Selecionar";
 		}
 	}
 	
@@ -65,7 +67,7 @@ public class ContactTableModel extends AbstractTableModel {
 		case COL_ADDRESS:
 			return contactList.get(rowIndex).getAddress();
 		case COL_CHECK:
-			return new Boolean(false);
+			return checkList[rowIndex];
 		default:
 			return null;
 		}
@@ -83,5 +85,22 @@ public class ContactTableModel extends AbstractTableModel {
 			return false;
 		}
 	}
+	
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		checkList[rowIndex] = (Boolean)aValue;
+        fireTableDataChanged();
+    }
+	
+	public void removeSelectedItems() {
+		ArrayList<Integer> indexList = new ArrayList<Integer>();
 
+		for(int i = 0; i < checkList.length; i++) {
+			if(checkList[i].booleanValue() == true) {
+				//TODO a list não contem o tipo Boolean se ela não for alterada pelo menos uma vez
+				indexList.add(new Integer(i));
+			}
+
+		}
+		new Controller().removeContacts(indexList);
+	}
 }

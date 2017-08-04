@@ -28,7 +28,6 @@ public class Principal {
 
 	private JFrame frame;
 	private JTable table;
-	private ContactTableModel tableModel;
 
 	/**
 	 * Launch the application.
@@ -62,9 +61,8 @@ public class Principal {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		table = new JTable();
-		table.setCellSelectionEnabled(true);
-		tableModel = new ContactTableModel();
-		table.setModel(tableModel);
+		table.setFillsViewportHeight(true);
+		table.setModel(new ContactTableModel());
 		frame.getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
 		
 		JPanel panel = new JPanel();
@@ -77,10 +75,7 @@ public class Principal {
 					AddContactDialog dialog = new AddContactDialog();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
-					
-					
-					
-					System.out.println("altualiza tabela");
+					updateTable();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -90,7 +85,17 @@ public class Principal {
 		panel.add(btnAddContact, "cell 0 0,alignx left,aligny top");
 		
 		JButton btnRemoveContact = new JButton("Remover");
+		btnRemoveContact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ContactTableModel ctm = (ContactTableModel)table.getModel();
+				ctm.removeSelectedItems();
+				updateTable();
+			}
+		});
 		panel.add(btnRemoveContact, "cell 0 1,alignx left,aligny top");
 	}
 	
+	private void updateTable() {
+		table.setModel(new ContactTableModel());
+	}
 }

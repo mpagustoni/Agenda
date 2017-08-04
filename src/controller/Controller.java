@@ -20,8 +20,11 @@ public class Controller {
 		cl.addContact(name, phone, address);
 	}
 	
-	public void removeContact(int index) {
-		cl.removeContact(index);
+	public void removeContacts(ArrayList<Integer> indexList) {
+		for(Integer index: indexList) {
+			cl.removeContact(index);
+		}
+		
 	}
 	
 }
