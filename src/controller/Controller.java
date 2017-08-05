@@ -21,10 +21,7 @@ public class Controller {
 	}
 	
 	public void removeContacts(ArrayList<Integer> indexList) {
-		for(Integer index: indexList) {
-			cl.removeContact(index);
-		}
-		
+			cl.removeContact(indexList);
 	}
 	
 }

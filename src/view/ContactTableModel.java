@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -20,6 +21,7 @@ public class ContactTableModel extends AbstractTableModel {
 	public ContactTableModel() {
 		 contactList = new Controller().getContacts();
 		 checkList = new Boolean[contactList.size()];
+		 Arrays.fill(checkList, new Boolean(false));
 	}
 	@Override
 	public int getColumnCount() {
@@ -67,7 +69,7 @@ public class ContactTableModel extends AbstractTableModel {
 		case COL_ADDRESS:
 			return contactList.get(rowIndex).getAddress();
 		case COL_CHECK:
-			return checkList[rowIndex];
+			return checkList[rowIndex].booleanValue();
 		default:
 			return null;
 		}
@@ -95,12 +97,11 @@ public class ContactTableModel extends AbstractTableModel {
 		ArrayList<Integer> indexList = new ArrayList<Integer>();
 
 		for(int i = 0; i < checkList.length; i++) {
-			if(checkList[i].booleanValue() == true) {
-				//TODO a list não contem o tipo Boolean se ela não for alterada pelo menos uma vez
+			if(checkList[i].booleanValue()) {
 				indexList.add(new Integer(i));
 			}
-
-		}
+		}	
+		indexList.trimToSize();
 		new Controller().removeContacts(indexList);
 	}
 }

@@ -58,10 +58,15 @@ public class ContactList {
 		this.saveContacts(contactList);
 	}
 	
-	public void removeContact(int index) {
+	public void removeContact(ArrayList<Integer> indexList) {
 		ArrayList <Contact>contactList = this.getContacts();
+		ArrayList <Contact>toRemove = new ArrayList <Contact>();
+		for(Integer index: indexList) {
+			toRemove.add(contactList.get(index));
+		}
+
 		try {
-			contactList.remove(index);
+			contactList.removeAll(toRemove);
 			this.saveContacts(contactList);
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
